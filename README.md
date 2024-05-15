@@ -1,0 +1,11 @@
+gin
+gorm
+mysql
+redis
+rocketmq
+log
+validation
+ioc
+aop
+cache
+ddd
