@@ -1,0 +1,51 @@
+package repository
+
+type {{.Schema.TableName}}Param struct {
+}
+
+type {{.Schema.TableName}}ParamCriteria struct {
+    Condition map[string]interface{}
+    Between map[string][]interface{}
+}
+
+{{range $i, $v := .Schema.ColumnList}}
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Equal({{$v.Param}} {{$v.Type}}) *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} = ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Gt({{$v.Param}} {{$v.Type}}) *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} > ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Gte({{$v.Param}} {{$v.Type}})  *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} >= ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Lt({{$v.Param}} {{$v.Type}})  *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} < ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Lte({{$v.Param}} {{$v.Type}})  *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} <= ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Like({{$v.Param}} {{$v.Type}})  *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} like ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}In({{$v.Param}} []{{$v.Type}})  *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} in ?"] = {{$v.Param}}
+	return c
+}
+
+func (c *{{$.Schema.TableName}}ParamCriteria) {{$v.Name}}Between(start, end {{$v.Type}})  *{{$.Schema.TableName}}ParamCriteria {
+    c.Condition["{{$v.Field}} between ? and ?"] = []{{$v.Type}}{start, end}
+	return c
+}
+{{end}}
