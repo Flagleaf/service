@@ -9,7 +9,7 @@ import (
 // +ioc:autowire:type=singleton
 type InfoService struct {
 	InfoRepository   repository.InfoRepository `singleton:"service/internal/infrastructure/repository.InfoRepositoryImpl"`
-	KeyServiceFacade facade.KeyServiceFacade   `singleton:"service/internal/infrastructure/facade/impl.KeyServiceFacadeCachedImpl"`
+	KeyServiceFacade facade.KeyServiceFacade   `singleton:"service/internal/infrastructure/facade.KeyServiceFacadeCachedImpl"`
 }
 
 func (i *InfoService) Save() {

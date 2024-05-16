@@ -1,14 +1,13 @@
-package impl
+package facade
 
 import (
 	"fmt"
-	"service/internal/infrastructure/facade"
 )
 
 // +ioc:autowire=true
 // +ioc:autowire:type=singleton
 type KeyServiceFacadeCachedImpl struct {
-	KeyServiceFacade facade.KeyServiceFacade `singleton:"service/internal/infrastructure/facade/impl.KeyServiceFacadeImpl"`
+	KeyServiceFacade KeyServiceFacade `singleton:"service/internal/infrastructure/facade.KeyServiceFacadeImpl"`
 }
 
 func (f *KeyServiceFacadeCachedImpl) GetById(id int64) (string, error) {

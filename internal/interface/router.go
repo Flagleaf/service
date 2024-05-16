@@ -14,7 +14,11 @@ type Router struct {
 func (route *Router) Setup() error {
 	r := gin.Default()
 
-	r.GET("/someJSON", route.InfoHandler.SaveInfo)
+	r.POST("/info", route.InfoHandler.SaveInfo)
+	r.DELETE("/info/:id", route.InfoHandler.Remove)
+	r.PUT("/info", route.InfoHandler.Update)
+	r.GET("/info/:id", route.InfoHandler.GetInfo)
+	r.GET("/info", route.InfoHandler.QueryInfoList)
 
 	err := r.Run(":8080")
 	if err != nil {

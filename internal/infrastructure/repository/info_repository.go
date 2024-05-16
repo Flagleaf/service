@@ -11,10 +11,10 @@ type InfoRepository interface {
 	DeleteByPrimaryKey(id int64) int64
 	DeleteByParam(param do.InfoDoParam) int64
 	UpdateByPrimaryKey(do do.InfoDo) int64
-	UpdateByParam(do *do.InfoDo, param *do.InfoDoParam) int64
+	UpdateByParam(do do.InfoDo, param do.InfoDoParam) int64
 	CountByParam(param do.InfoDoParam) int64
 	SelectByPrimaryKey(id int64) do.InfoDo
-	SelectByParam(param *do.InfoDoParam) []do.InfoDo
+	SelectByParam(param do.InfoDoParam) []do.InfoDo
 	//PageableSelectByParam(param *do.InfoDoParam, pageIndex, pageSize int) []do.InfoDo
 }
 
@@ -43,7 +43,7 @@ func (r *InfoRepositoryImpl) UpdateByPrimaryKey(do do.InfoDo) int64 {
 	return database.Db.Save(&do).RowsAffected
 }
 
-func (r *InfoRepositoryImpl) UpdateByParam(do *do.InfoDo, param *do.InfoDoParam) int64 {
+func (r *InfoRepositoryImpl) UpdateByParam(do do.InfoDo, param do.InfoDoParam) int64 {
 	return 0
 }
 
