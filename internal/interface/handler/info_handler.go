@@ -18,7 +18,8 @@ type InfoHandler struct {
 
 func (i *InfoHandler) SaveInfo(c *gin.Context) {
 	var createReq dto.InfoCreateReq
-	if err := c.ShouldBindJSON(&createReq); err != nil {
+	err := c.ShouldBindJSON(&createReq)
+	if err != nil {
 		c.AbortWithError(http.StatusOK, err)
 		return
 	}
@@ -29,7 +30,9 @@ func (i *InfoHandler) SaveInfo(c *gin.Context) {
 
 func (i *InfoHandler) Remove(c *gin.Context) {
 	id := c.Param("id")
-	iid, _ := strconv.ParseInt(id, 0, 0)
+	iid, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+	}
 	i.InfoService.Delete(iid)
 	c.Status(http.StatusOK)
 }
