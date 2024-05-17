@@ -7,6 +7,7 @@ import (
 	"service/internal/domain/info/service"
 	error2 "service/internal/infrastructure/error"
 	"service/internal/interface/dto"
+	"strconv"
 )
 
 // +ioc:autowire=true
@@ -27,19 +28,14 @@ func (i *InfoHandler) SaveInfo(c *gin.Context) {
 }
 
 func (i *InfoHandler) Remove(c *gin.Context) {
-	data := map[string]interface{}{
-		"lang": "GO语言",
-		"tag":  "<br>",
-	}
-	c.AsciiJSON(http.StatusOK, data)
+	id := c.Param("id")
+	iid, _ := strconv.ParseInt(id, 0, 0)
+	i.InfoService.Delete(iid)
+	c.Status(http.StatusOK)
 }
 
 func (i *InfoHandler) Update(c *gin.Context) {
-	data := map[string]interface{}{
-		"lang": "GO语言",
-		"tag":  "<br>",
-	}
-	c.AsciiJSON(http.StatusOK, data)
+	c.Status(http.StatusOK)
 }
 
 func (i *InfoHandler) GetInfo(c *gin.Context) {

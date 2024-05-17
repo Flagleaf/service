@@ -17,6 +17,10 @@ func (i *InfoService) Save(do do.InfoDo) {
 	i.InfoRepository.Insert(do)
 }
 
+func (i *InfoService) Delete(id int64) {
+	i.InfoRepository.DeleteByPrimaryKey(id)
+}
+
 func (i *InfoService) GetInfo(id int64) do.InfoDo {
 	return i.InfoRepository.SelectByPrimaryKey(id)
 }
