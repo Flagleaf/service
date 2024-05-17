@@ -3,7 +3,10 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	do2 "service/internal/domain/info/do"
 	"service/internal/domain/info/service"
+	error2 "service/internal/infrastructure/error"
+	"service/internal/interface/dto"
 )
 
 // +ioc:autowire=true
@@ -13,16 +16,17 @@ type InfoHandler struct {
 }
 
 func (i *InfoHandler) SaveInfo(c *gin.Context) {
-	i.InfoService.Save()
-	data := map[string]interface{}{
-		"lang": "GO语言",
-		"tag":  "<br>",
+	var createReq dto.InfoCreateReq
+	if err := c.ShouldBindJSON(&createReq); err != nil {
+		c.AbortWithError(http.StatusOK, err)
+		return
 	}
-	c.AsciiJSON(http.StatusOK, data)
+	do := do2.InfoDo{}
+	i.InfoService.Save(do)
+	c.Status(http.StatusOK)
 }
 
 func (i *InfoHandler) Remove(c *gin.Context) {
-	i.InfoService.Save()
 	data := map[string]interface{}{
 		"lang": "GO语言",
 		"tag":  "<br>",
@@ -31,7 +35,6 @@ func (i *InfoHandler) Remove(c *gin.Context) {
 }
 
 func (i *InfoHandler) Update(c *gin.Context) {
-	i.InfoService.Save()
 	data := map[string]interface{}{
 		"lang": "GO语言",
 		"tag":  "<br>",
@@ -40,8 +43,17 @@ func (i *InfoHandler) Update(c *gin.Context) {
 }
 
 func (i *InfoHandler) GetInfo(c *gin.Context) {
+	do := i.InfoService.GetInfo(1)
+	c.Status(http.StatusOK)
+	c.Set("response", do)
 }
 
 func (i *InfoHandler) QueryInfoList(c *gin.Context) {
-
+	if 11 == 12 {
+		c.AbortWithError(http.StatusOK, error2.NewServiceError(1, ""))
+		return
+	}
+	dos := i.InfoService.QueryInfoList()
+	c.Status(http.StatusOK)
+	c.Set("response", dos)
 }

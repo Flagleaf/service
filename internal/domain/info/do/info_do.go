@@ -1,8 +1,11 @@
 package do
 
 type InfoDo struct {
-	Id   int64
-	Name string
+	Id        int64
+	Name      string
+	Code      string
+	CreatedAt int64
+	UpdatedAt int64
 }
 
 type InfoDoParam struct {

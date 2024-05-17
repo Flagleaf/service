@@ -66,9 +66,9 @@ func (r *InfoRepositoryImpl) SelectByPrimaryKey(id int64) do.InfoDo {
 func (r *InfoRepositoryImpl) SelectByParam(param do.InfoDoParam) []do.InfoDo {
 	var dos []do.InfoDo
 	db := database.Db
-	for k, v := range param.Criteria.Condition {
-		db = db.Where(k, v)
-	}
+	//for k, v := range param.Criteria.Condition {
+	//	db = db.Where(k, v)
+	//}
 	db.Find(&dos)
 	return dos
 }

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"service/internal/domain/info/do"
 	"service/internal/infrastructure/facade"
 	"service/internal/infrastructure/repository"
 )
@@ -12,6 +13,14 @@ type InfoService struct {
 	KeyServiceFacade facade.KeyServiceFacade   `singleton:"service/internal/infrastructure/facade.KeyServiceFacadeCachedImpl"`
 }
 
-func (i *InfoService) Save() {
-	i.KeyServiceFacade.GetById(1)
+func (i *InfoService) Save(do do.InfoDo) {
+	i.InfoRepository.Insert(do)
+}
+
+func (i *InfoService) GetInfo(id int64) do.InfoDo {
+	return i.InfoRepository.SelectByPrimaryKey(id)
+}
+
+func (i *InfoService) QueryInfoList() []do.InfoDo {
+	return i.InfoRepository.SelectByParam(do.InfoDoParam{})
 }

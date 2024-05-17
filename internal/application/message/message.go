@@ -13,6 +13,6 @@ type Consumer struct {
 
 func (i *Consumer) Start() error {
 	fmt.Println("init consumer.")
-	i.InfoService.Save()
+	//i.InfoService.Save(nil)
 	return nil
 }

@@ -2,6 +2,7 @@ package _interface
 
 import (
 	"github.com/gin-gonic/gin"
+	"service/internal/infrastructure/middleware"
 	"service/internal/interface/handler"
 )
 
@@ -13,6 +14,8 @@ type Router struct {
 
 func (route *Router) Setup() error {
 	r := gin.Default()
+
+	r.Use(middleware.ResponseMiddleware())
 
 	r.POST("/info", route.InfoHandler.SaveInfo)
 	r.DELETE("/info/:id", route.InfoHandler.Remove)
